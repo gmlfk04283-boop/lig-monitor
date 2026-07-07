@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LIG Monitor — 레이저 유도 그래핀 논문 트렌드</title>
+<title>LIG Paper Monitoring System</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
 <script src="https://cdn.jsdelivr.net/npm/marked@11/marked.min.js"></script>
@@ -17,10 +17,10 @@
   <div class="topbar-inner">
     <div class="brand">
       <span class="brand-mark">LIG</span>
-      <span class="brand-name">Monitor</span>
+      <span class="brand-name">Paper Monitoring System</span>
     </div>
     <div class="topbar-meta">
-      <span id="last-updated">데이터 로딩 중…</span>
+      <span id="last-updated">Loading data…</span>
     </div>
   </div>
 </header>
@@ -28,13 +28,13 @@
 <section class="hero">
   <div class="hero-text">
     <p class="eyebrow">Laser-Induced Graphene · Journal Trend Intelligence</p>
-    <h1>저널은 LIG에서<br>무엇을 기대하는가</h1>
-    <p class="hero-sub">임팩트팩터 8 이상 저널에 실리는 레이저 유도 그래핀(LIG) 논문을 매주 자동으로 수집하고, 각 저널이 어떤 연구 테마를 선호하는지 지식그래프로 추적합니다.</p>
+    <h1>What journals<br><em>expect</em> from LIG</h1>
+    <p class="hero-sub">Every week, we scan journals with an impact factor of 8 or higher for new laser-induced graphene research, classify what each journal is really looking for, and flag anything that overlaps with semiconductor-grade LIG work — doping, wafer-scale synthesis, active devices.</p>
   </div>
   <div class="hero-stats" id="stat-strip">
-    <div class="stat"><span class="stat-num" id="stat-papers">–</span><span class="stat-label">수집된 논문</span></div>
-    <div class="stat"><span class="stat-num" id="stat-journals">–</span><span class="stat-label">감시 중 저널</span></div>
-    <div class="stat"><span class="stat-num" id="stat-themes">–</span><span class="stat-label">연구 테마</span></div>
+    <div class="stat"><span class="stat-num" id="stat-papers">–</span><span class="stat-label">Papers tracked</span></div>
+    <div class="stat"><span class="stat-num" id="stat-journals">–</span><span class="stat-label">Journals watched</span></div>
+    <div class="stat"><span class="stat-num" id="stat-themes">–</span><span class="stat-label">Research themes</span></div>
   </div>
 </section>
 
@@ -42,59 +42,59 @@
 
   <section class="panel" id="alert-panel">
     <div class="panel-head">
-      <h2>⚠ 반도체/능동소자 관련 논문 (경쟁 동향)</h2>
-      <p class="panel-sub">도핑, 웨이퍼 기반 합성, 능동소자 응용 등 우리 연구 방향과 겹치는 논문만 모아 보여줍니다.</p>
+      <h2>Semiconductor &amp; active-device watch</h2>
+      <p class="panel-sub">Papers that overlap with doping, wafer-scale synthesis, or active-device work — the direction we're pursuing.</p>
     </div>
     <div id="alert-empty" class="empty-state" hidden>
-      <p>아직 반도체/능동소자 관련으로 감지된 논문이 없습니다.</p>
+      <p>No semiconductor-relevant papers detected yet.</p>
     </div>
     <ul id="alert-list" class="papers-list alert-list"></ul>
   </section>
 
   <section class="panel" id="graph-panel">
     <div class="panel-head">
-      <h2>저널 × 테마 지식그래프</h2>
-      <p class="panel-sub">선의 굵기는 해당 저널이 그 테마의 논문을 얼마나 많이 출판했는지를 뜻합니다. 노드를 클릭하면 관련 논문만 필터링됩니다.</p>
+      <h2>Journal × theme knowledge graph</h2>
+      <p class="panel-sub">Line thickness shows how much a journal favors that theme. Click a node to filter the paper list below.</p>
     </div>
     <div id="graph-empty" class="empty-state" hidden>
-      <p>아직 수집된 데이터가 없습니다.</p>
-      <p class="empty-sub">GitHub Actions가 처음 실행되면(매주 월요일, 또는 Actions 탭에서 수동 실행) 이 자리에 그래프가 나타납니다.</p>
+      <p>No data collected yet.</p>
+      <p class="empty-sub">This graph appears once GitHub Actions runs for the first time (weekly, or triggered manually from the Actions tab).</p>
     </div>
     <svg id="graph-svg"></svg>
   </section>
 
   <section class="panel" id="breakdown-panel">
     <div class="panel-head">
-      <h2>저널별 테마 분포</h2>
-      <p class="panel-sub">각 저널이 누적으로 어떤 테마에 얼마나 집중해왔는지 비율로 보여줍니다.</p>
+      <h2>Theme distribution by journal</h2>
+      <p class="panel-sub">Cumulative share of each research theme, per journal.</p>
     </div>
     <div id="breakdown-empty" class="empty-state" hidden>
-      <p>표시할 데이터가 아직 없습니다.</p>
+      <p>Nothing to show yet.</p>
     </div>
     <canvas id="breakdown-chart"></canvas>
   </section>
 
   <section class="panel" id="report-panel">
     <div class="panel-head">
-      <h2>주간/월간 리포트</h2>
+      <h2>Weekly &amp; monthly reports</h2>
       <select id="report-select"></select>
     </div>
     <div id="report-empty" class="empty-state" hidden>
-      <p>아직 생성된 리포트가 없습니다. 첫 자동 실행 이후 여기에 표시됩니다.</p>
+      <p>No report generated yet. This will appear after the first automated run.</p>
     </div>
     <article id="report-body" class="report-body"></article>
   </section>
 
   <section class="panel" id="papers-panel">
     <div class="panel-head">
-      <h2>최근 수집 논문</h2>
+      <h2>Recent papers</h2>
       <div class="filters">
-        <select id="filter-journal"><option value="">모든 저널</option></select>
-        <select id="filter-theme"><option value="">모든 테마</option></select>
+        <select id="filter-journal"><option value="">All journals</option></select>
+        <select id="filter-theme"><option value="">All themes</option></select>
       </div>
     </div>
     <div id="papers-empty" class="empty-state" hidden>
-      <p>아직 수집된 논문이 없습니다.</p>
+      <p>No papers collected yet.</p>
     </div>
     <ul id="papers-list" class="papers-list"></ul>
   </section>
@@ -102,7 +102,7 @@
 </main>
 
 <footer class="site-footer">
-  <p>fetch_papers.py(수집) · analyze_papers.py(분석) · GitHub Actions로 매주 자동 갱신</p>
+  <p>fetch_papers.py (collect) · analyze_papers.py (classify) · auto-updated weekly via GitHub Actions</p>
 </footer>
 
 <script src="app.js"></script>
