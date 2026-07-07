@@ -39,12 +39,13 @@ jobs:
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
 
-      - name: Commit updated data
+     - name: Commit updated data
         run: |
           git config user.name "lig-monitor-bot"
           git config user.email "actions@github.com"
           git add data/
           git diff --quiet --cached || git commit -m "Weekly LIG data update ($(date +'%Y-%m-%d'))"
+          git pull --rebase origin main
           git push
 
       - name: Copy data into site folder for Pages
