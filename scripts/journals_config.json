@@ -1,0 +1,70 @@
+{
+  "_comment": "IF 값은 2024년 JCR 기준 대략치입니다. 매년 6월경 갱신되므로 주기적으로 https://jcr.clarivate.com 등에서 확인 후 impact_factor 값을 직접 수정해 주세요. name은 OpenAlex/Crossref의 container-title(저널명) 문자열과 최대한 일치해야 매칭됩니다.",
+  "search_keywords": [
+    "laser-induced graphene",
+    "laser induced graphene",
+    "LIG"
+  ],
+  "min_impact_factor": 8.0,
+  "journals": [
+    { "name": "Nature Communications", "impact_factor": 14.7 },
+    { "name": "Advanced Materials", "impact_factor": 27.4 },
+    { "name": "Advanced Functional Materials", "impact_factor": 18.5 },
+    { "name": "Advanced Science", "impact_factor": 14.3 },
+    { "name": "ACS Nano", "impact_factor": 15.8 },
+    { "name": "Nano Energy", "impact_factor": 16.8 },
+    { "name": "Nano Letters", "impact_factor": 9.6 },
+    { "name": "Small", "impact_factor": 13.0 },
+    { "name": "Chemical Engineering Journal", "impact_factor": 13.4 },
+    { "name": "Advanced Energy Materials", "impact_factor": 24.4 },
+    { "name": "Materials Today", "impact_factor": 21.1 },
+    { "name": "Journal of Materials Chemistry A", "impact_factor": 11.9 },
+    { "name": "ACS Sensors", "impact_factor": 9.0 },
+    { "name": "npj Flexible Electronics", "impact_factor": 10.1 }
+  ],
+  "themes": [
+    {
+      "id": "new_application",
+      "label_ko": "신규 응용분야 개척",
+      "description": "LIG를 활용해 기존에 없던 새로운 응용 도메인이나 디바이스 형태를 처음 제시하는 연구 (예: 전자피부, 로봇, 우주복, 작물 센서 등 새로운 적용 사례)"
+    },
+    {
+      "id": "device_performance",
+      "label_ko": "소자 성능/다기능 최적화",
+      "description": "이미 알려진 LIG 응용(센서, 바이오전자 등)에서 성능, 다기능성, 통합도를 극대화하는 연구"
+    },
+    {
+      "id": "energy_storage",
+      "label_ko": "에너지 저장/변환 소자",
+      "description": "슈퍼커패시터, 배터리 전극, 에너지 하베스팅 등 에너지 관련 응용에 초점을 맞춘 연구"
+    },
+    {
+      "id": "mechanism_process",
+      "label_ko": "합성 메커니즘/공정 규명",
+      "description": "LIG의 형성 메커니즘, 공정 최적화, 새로운 전구체나 레이저 조건 자체를 다루는 기초/공정 연구"
+    },
+    {
+      "id": "review",
+      "label_ko": "종합 리뷰/전망",
+      "description": "LIG 관련 다수 연구를 종합적으로 정리하는 리뷰 논문"
+    }
+  ],
+  "_semiconductor_comment": "우리 연구(LIG의 반도체 소자화: 도핑, 웨이퍼 기반 합성, 능동소자 응용)와 겹치는 논문을 별도로 감지하기 위한 카테고리. 여러 개가 동시에 해당될 수 있음(다중 라벨).",
+  "semiconductor_categories": [
+    {
+      "id": "doping",
+      "label_ko": "도핑/원소 기능화",
+      "description": "LIG에 질소, 붕소, 금속, 이종원자 등을 도핑하거나 화학적으로 기능화하여 전기적/화학적 물성을 튜닝하는 연구"
+    },
+    {
+      "id": "wafer_scale_synthesis",
+      "label_ko": "웨이퍼 기반/반도체 공정 호환 합성",
+      "description": "실리콘 웨이퍼, SiC, 산화막 등 반도체 공정과 호환되는 기판 위에서 LIG를 합성하거나, 포토리소그래피/CMOS 공정과 통합하는 연구"
+    },
+    {
+      "id": "active_device",
+      "label_ko": "능동소자 응용",
+      "description": "LIG를 트랜지스터, 다이오드, 광검출기, 정류소자 등 전류/신호를 능동적으로 제어하는 반도체 소자의 채널이나 활성층으로 사용하는 연구 (수동적인 전극/배선 용도는 제외)"
+    }
+  ]
+}
