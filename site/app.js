@@ -6,11 +6,17 @@ const DATA = {
 };
 
 const THEME_LABELS = {
-  new_application: "신규 응용분야 개척",
-  device_performance: "소자 성능/다기능 최적화",
-  energy_storage: "에너지 저장/변환 소자",
-  mechanism_process: "합성 메커니즘/공정 규명",
-  review: "종합 리뷰/전망",
+  new_application: "New application frontier",
+  device_performance: "Device performance & integration",
+  energy_storage: "Energy storage & conversion",
+  mechanism_process: "Synthesis mechanism & process",
+  review: "Review & outlook",
+};
+
+const SEMI_LABELS = {
+  doping: "Doping / functionalization",
+  wafer_scale_synthesis: "Wafer-scale synthesis",
+  active_device: "Active device",
 };
 
 async function loadJSON(path, fallback) {
@@ -47,8 +53,8 @@ function renderStats() {
 
   const generatedAt = DATA.graph.generated_at;
   document.getElementById("last-updated").textContent = generatedAt
-    ? `마지막 업데이트: ${new Date(generatedAt).toLocaleString("ko-KR")}`
-    : "아직 데이터 없음";
+    ? `Last updated ${new Date(generatedAt).toLocaleString("en-US")}`
+    : "No data yet";
 }
 
 function renderGraph() {
@@ -241,7 +247,7 @@ function renderAlerts() {
         </div>
         <div>
           <p class="paper-title"><a href="https://doi.org/${a.doi}" target="_blank" style="color:inherit">${a.title}</a></p>
-          ${(a.category_labels || []).map((c) => `<span class="alert-badge">${c}</span>`).join("")}
+          ${(a.categories || []).map((c) => `<span class="alert-badge">${SEMI_LABELS[c] || c}</span>`).join("")}
           ${a.rationale_ko ? `<p style="font-size:13px;color:var(--text-faint);margin-top:6px">${a.rationale_ko}</p>` : ""}
         </div>
       </li>`
